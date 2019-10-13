@@ -42,7 +42,7 @@ target_link_libraries(game-interface
     Detour)
 
 add_library(game
-  ${PRIVATE_SOURCES})
+  ${PRIVATE_SOURCES} Government/Government.cpp Government/Government.h)
 
 target_include_directories(game
   PRIVATE

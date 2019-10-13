@@ -16,7 +16,7 @@
  */
 
 // This is where scripts' loading functions should be declared:
-
+void AddSC_HelloWorldScript();
 
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()

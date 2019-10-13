@@ -30,6 +30,7 @@
 #include "PetDefines.h"
 #include "PlayerTaxi.h"
 #include "QuestDef.h"
+#include "Government.h"
 #include <memory>
 #include <queue>
 #include <unordered_set>
@@ -2169,6 +2170,8 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         std::string GetDebugInfo() const override;
 
+        Government* GetCitizenship();
+
     protected:
         // Gamemaster whisper whitelist
         GuidList WhisperList;
@@ -2176,6 +2179,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         uint32 m_foodEmoteTimerCount;
         float m_powerFraction[MAX_POWERS];
         uint32 m_contestedPvPTimer;
+        Government* m_government;
 
         /*********************************************************/
         /***               BATTLEGROUND SYSTEM                 ***/

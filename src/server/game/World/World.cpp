@@ -142,6 +142,9 @@ World::World()
     _guidAlert = false;
     _warnDiff = 0;
     _warnShutdownTime = GameTime::GetGameTime();
+
+    m_HordeGovernment = new Government("Horde");
+    m_AllianceGovernment = new Government("Alliance");
 }
 
 /// World destructor
@@ -161,6 +164,9 @@ World::~World()
 
     VMAP::VMapFactory::clear();
     MMAP::MMapFactory::clear();
+
+    delete m_HordeGovernment;
+    delete m_AllianceGovernment;
 
     /// @todo free addSessQueue
 }
@@ -3498,6 +3504,16 @@ void World::ReloadRBAC()
 void World::RemoveOldCorpses()
 {
     m_timers[WUPDATE_CORPSES].SetCurrent(m_timers[WUPDATE_CORPSES].GetInterval());
+}
+
+Government* World::GetHordeGovernment() const
+{
+    return m_HordeGovernment;
+}
+
+Government* World::GetAllianceGovernment() const
+{
+    return m_AllianceGovernment;
 }
 
 Realm realm;

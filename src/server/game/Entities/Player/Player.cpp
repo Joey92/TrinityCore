@@ -26831,3 +26831,17 @@ std::string Player::GetDebugInfo() const
     sstr << Unit::GetDebugInfo();
     return sstr.str();
 }
+
+Government* Player::GetCitizenship() {
+    switch (m_team) {
+        case HORDE:
+            return sWorld->GetHordeGovernment();
+            break;
+        case ALLIANCE:
+            return sWorld->GetAllianceGovernment();
+            break;
+        default:
+            return nullptr;
+            break;
+    }
+}

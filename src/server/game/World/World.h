@@ -35,6 +35,7 @@
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <Government/Government.h>
 
 class Player;
 class WorldPacket;
@@ -777,6 +778,9 @@ class TC_GAME_API World
         bool IsGuidWarning() { return _guidWarn; }
         bool IsGuidAlert() { return _guidAlert; }
 
+        Government* GetHordeGovernment() const;
+        Government* GetAllianceGovernment() const;
+
     protected:
         void _UpdateGameTime();
 
@@ -889,7 +893,9 @@ class TC_GAME_API World
         uint32 _warnDiff;
         time_t _warnShutdownTime;
 
-    friend class debug_commandscript;
+        friend class debug_commandscript;
+        Government* m_HordeGovernment;
+        Government* m_AllianceGovernment;
 };
 
 TC_GAME_API extern Realm realm;
