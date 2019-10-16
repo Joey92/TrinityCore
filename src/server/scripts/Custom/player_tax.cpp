@@ -15,12 +15,32 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// This is where scripts' loading functions should be declared:
-void AddSC_TaxingPlayerScript();
+#include "ScriptMgr.h"
+#include "player.h"
+#include <World/World.h>
 
-// The name of this function should match:
-// void Add${NameOfDirectory}Scripts()
-void AddCustomScripts()
+class player_tax : public PlayerScript {
+
+public:
+    player_tax() : PlayerScript("player_tax") { }
+
+    void OnMoneyChanged(Player *player, int32& amount) {
+        const uint32 amountTaxed = player->GetCitizenship()->Tax(amount);
+
+        char strBuff[256];
+        sprintf(strBuff, "You pay %d in taxes to the %s", amountTaxed, player->GetCitizenship()->GetName());
+        sWorld->SendServerMessage(SERVER_MSG_STRING, strBuff, player);
+
+        if (amount > 0) {
+            amount = amount - amountTaxed;
+        } else {
+            amount = amount + amountTaxed;
+        }
+        
+    }
+};
+
+void AddSC_TaxingPlayerScript()
 {
-    AddSC_TaxingPlayerScript();
+    new player_tax();
 }
